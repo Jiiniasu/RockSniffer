@@ -17,6 +17,8 @@ namespace RockSniffer.Configuration
         [JsonIgnore]
         public OutputFile[] output;
 
+        public bool enabled = true;
+
         //Have a dictionary for easier configuration via editing json
         public Dictionary<string, string> outputs = new Dictionary<string, string>() {
             { "song_details.txt", "%SONG_ARTIST% - %SONG_NAME%" },

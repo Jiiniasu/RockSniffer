@@ -198,7 +198,10 @@ namespace RockSniffer
         public void Run()
         {
             //Clear output / create output files
-            ClearOutput();
+            if (config.outputSettings.enabled)
+            {
+                ClearOutput();
+            }
 
             Logger.Log("Waiting for rocksmith");
 
@@ -277,7 +280,10 @@ namespace RockSniffer
                     break;
                 }
 
-                OutputDetails();
+                if (config.outputSettings.enabled)
+                {
+                    OutputDetails();
+                }
 
                 //GOTTA GO FAST
                 Thread.Sleep(1000);
@@ -310,13 +316,16 @@ namespace RockSniffer
             details = args.songDetails;
 
             //Write album art
-            if (details.albumArt != null)
+            if (config.outputSettings.enabled)
             {
-                WriteImageToFileLocking("output/album_cover.jpeg", details.albumArt);
-            }
-            else
-            {
-                WriteImageToFileLocking("output/album_cover.jpeg", defaultAlbumCover);
+                if (details.albumArt != null)
+                {
+                    WriteImageToFileLocking("output/album_cover.jpeg", details.albumArt);
+                }
+                else
+                {
+                    WriteImageToFileLocking("output/album_cover.jpeg", defaultAlbumCover);
+                }
             }
         }
 
